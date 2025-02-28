@@ -1,9 +1,7 @@
 {
   "name": "zeus-time",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A next-gen, deterministic timekeeping standard. UNIX is dead. ZEUS lives.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/TIMESync38/zeus-time.git"
@@ -24,6 +22,14 @@
     "test": "jest",
     "prepare": "npm run build"
   },
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
@@ -38,6 +44,6 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "zeus-time": "^0.1.0"
+    "zeus-time": "^0.1.2"
   }
 }
