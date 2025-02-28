@@ -44,6 +44,6 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "zeus-time": "^0.1.2"
+    "zeus-time": "^0.1.3"
   }
 }
