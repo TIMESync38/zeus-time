@@ -1,6 +1,6 @@
 {
   "name": "zeus-time",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A next-gen, deterministic timekeeping standard. UNIX is dead. ZEUS lives.",
   "repository": {
     "type": "git",
