@@ -1,4 +1,23 @@
-export { generateZeusHash, unixToZeus, zeusToUnix } from './utils';
-export { validateZeusTimestamp } from "./validation";
-export { executeAtZeusEpoch } from "./execution";
-export { legacyUnixToZeus, legacyZeusToUnix } from './legacy'; 
+export type { ZeusAlgorithm, ZeusFormat, ZeusOptions } from "./types";
+
+export { normalizeTime } from "./normalize";
+
+export {
+  zeusHash,
+  generateZeusHash,
+  verifyZeusHash,
+  unixToZeus,
+  unixToZeusSync,
+  zeusToUnix
+} from "./api";
+
+export { legacyUnixToZeus, legacyZeusHash } from "./legacy";
+
+// v0.1 compatibility helpers
+export { validateZeusTimestamp, executeAtZeusEpoch, legacyZeusToUnix } from "./compat";
+
+export {
+  isValidUnixTimestampSeconds,
+  isValidZeusHex,
+  isValidZeusBase64Url
+} from "./validation";

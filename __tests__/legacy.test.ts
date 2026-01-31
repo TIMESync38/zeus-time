@@ -1,17 +1,25 @@
-import { convertUnixToZeus } from '../src/legacy';
+import { unixToZeus, legacyUnixToZeus, zeusHash, legacyZeusHash } from "../src";
 
-describe('Legacy UNIX to ZEUS Conversion Tests', () => {
-  test('Converts UNIX timestamp to ZEUS format correctly', async () => {
-    const unixTime = 1704067200; // Jan 1, 2024
-    const zeusHash = await convertUnixToZeus(unixTime);
-    expect(typeof zeusHash).toBe('string');
-    expect(zeusHash.length).toBe(64); // Blake3 hash length
+describe("Legacy SHA-256 mode Tests (v0.2)", () => {
+  test("Default is BLAKE3 and outputs 64 hex chars", () => {
+    const unixTime = 1704067200;
+    const hash = unixToZeus(unixTime);
+    expect(typeof hash).toBe("string");
+    expect(hash.length).toBe(64);
   });
 
-  test('Handles legacy SHA-256 fallback correctly', async () => {
+  test("Legacy SHA-256 fallback outputs 64 hex chars", () => {
     const unixTime = 1704067200;
-    const zeusHash = await convertUnixToZeus(unixTime, true);
-    expect(typeof zeusHash).toBe('string');
-    expect(zeusHash.length).toBe(64); // SHA-256 hash length
+    const hash = legacyUnixToZeus(unixTime);
+    expect(typeof hash).toBe("string");
+    expect(hash.length).toBe(64);
+  });
+
+  test("Base64url output is shorter", () => {
+    const unixTime = 1704067200;
+    const h1 = zeusHash(unixTime, { format: "base64url" });
+    const h2 = legacyZeusHash(unixTime, "base64url");
+    expect(h1.length).toBe(43);
+    expect(h2.length).toBe(43);
   });
 });

@@ -1,155 +1,87 @@
-# ZEUS: The Future of Timekeeping 🚀
+# ZEUS Time
 
-**UNIX is dead. ZEUS lives.** This package introduces a deterministic, cryptographically verifiable time system designed to replace traditional UNIX timestamps. With ZEUS, developers can generate and validate time hashes, ensuring synchronization across systems without relying on sequential UNIX time.
+Deterministic, cryptographically verifiable time hashing for Node, browsers, and Expo or React Native.
 
----
+ZEUS turns a timestamp into a fixed hash. The same moment, normalized the same way, always produces the same hash. This is useful for tamper-evident logs, distributed coordination, and time keyed identifiers.
 
-## 🌟 Features
-
-👉 **Deterministic Timestamps** – Generate a unique, cryptographic hash from any timestamp.  
-👉 **Epoch-Based Execution** – Set an epoch based on a ZEUS hash for synchronized execution.  
-👉 **Decentralized & Immutable** – No single point of failure; timestamp verification is trustless.  
-👉 **Backward-Compatible with UNIX** – Convert traditional UNIX time into ZEUS easily.  
-👉 **Supports Legacy Systems** – SHA-256 fallback for older systems that can't run Blake3.  
-👉 **Ideal for Web3, Smart Contracts, IoT, and Security Applications**  
-
----
-
-## 🛢️ Installation
+## Install
 
 ```sh
-# Using Yarn
-yarn add zeus-time
-
-# Using NPM
 npm install zeus-time
+# or
+yarn add zeus-time
 ```
 
----
+## Quick start
 
-## ❤️ Usage
+```ts
+import { zeusHash, verifyZeusHash } from "zeus-time";
 
-### 🔹 Generate a ZEUS Timestamp
-```typescript
-import { generateZeusHash } from "zeus-time";
-
-async function generateTimeHash() {
-  const timestamp = new Date().toISOString();
-  const hash = await generateZeusHash(timestamp);
-  console.log(`ZEUS Time Hash: ${hash}`);
-}
-
-generateTimeHash();
+const iso = new Date().toISOString();
+const h = zeusHash(iso);               // default: blake3, hex
+const ok = verifyZeusHash(iso, h);     // true
 ```
 
-### 🔹 Convert UNIX Time to ZEUS Time
-```typescript
-import { unixToZeus } from "zeus-time";
+## Input formats
 
-const unixTime = Math.floor(Date.now() / 1000);
-unixToZeus(unixTime).then(hash => {
-  console.log(`Converted ZEUS Epoch: ${hash}`);
-});
+`zeusHash()` accepts:
+
+- `Date`
+- ISO timestamp string
+- `number` as unix seconds or unix milliseconds (auto-detected)
+
+Normalization always returns an ISO 8601 string in UTC with milliseconds. That normalized string is the thing that gets hashed.
+
+## Output formats
+
+- Default output is lowercase hex (64 chars)
+- Optional output is base64url (43 chars, no padding)
+
+```ts
+import { zeusHash } from "zeus-time";
+
+const hHex = zeusHash("2025-01-01T00:00:00Z");
+const hB64 = zeusHash("2025-01-01T00:00:00Z", { format: "base64url" });
 ```
 
-### 🔹 Convert ZEUS Back to UNIX Time
-```typescript
-import { zeusToUnix } from "zeus-time";
+## Algorithms
 
-const zeusHash = "your_zeus_hash_here";
-const unixTime = zeusToUnix(zeusHash);
-console.log(`Converted UNIX Time: ${unixTime}`);
-```
-```
-💡 **Note:** `zeusToUnix()` is the primary function for ZEUS time handling. For legacy support, use `legacyZeusToUnix()`.
-```
+- Default algorithm is BLAKE3
+- Legacy algorithm is SHA-256
 
-### 🔹 Execute Based on a ZEUS Epoch
-```typescript
-import { executeAtZeusEpoch } from "zeus-time";
+```ts
+import { zeusHash, legacyUnixToZeus } from "zeus-time";
 
-executeAtZeusEpoch(1735689600, () => {
-  console.log("Executing synchronized action at ZEUS Epoch!");
-});
+const blake3Hash = zeusHash(1735689600);
+const sha256Hash = legacyUnixToZeus(1735689600);
 ```
 
----
+## About reverse conversion
 
-## 🚀 Benchmark Performance
-Zeus-Time is **blazing fast!** Recent tests show it can **hash timestamps at record-breaking speeds!** 💥
+ZEUS hashes are one-way. There is no cryptographic reverse from hash to timestamp.
 
-```bash
-Performance Test: Hashed 1000 timestamps in **12ms** ⚡  
-Performance Test: Hashed 5000 timestamps in **51ms** ⚡  
-Performance Test: Hashed 10,000 timestamps in **98ms** ⚡  
-Performance Test: Hashed 50,000 timestamps in **434ms** ⚡  
-```
+If you need reverse mapping, that is a lookup problem. Store the original timestamp alongside the hash in your own database or ledger.
 
-### **Why Use Zeus-Time?**
-👉 **Ultra-Fast** - Outperforms traditional UNIX-based hashing.  
-👉 **Cryptographically Secure** - Uses BLAKE3 hashing for reliability.  
-👉 **Future-Proof** - Designed for next-gen blockchain & AI applications.  
+## Expo compatibility
 
----
+This version avoids Node builtins and avoids WASM dependencies in the default path. It is designed to work in Expo and React Native without polyfills.
 
-## 🎯 Use Cases
+## Compatibility
 
-👉 **Smart Contracts** – Ensure execution only happens at a predetermined time.  
-👉 **Decentralized Networks** – Nodes validate time-sensitive actions without a global clock.  
-👉 **Gaming & AI** – Sync in-game events or AI processes based on immutable time hashes.  
-👉 **Supply Chain & IoT** – Devices validate time-based triggers securely.  
-👉 **File Integrity & Authentication** – Timestamped events are cryptographically secured.  
+v0.2 keeps the v0.1 public API available so existing consumers do not break.
 
----
+Legacy exports restored:
 
-## 🔄 Legacy System Support
+- `validateZeusTimestamp(timestamp, expectedHash)`
+- `executeAtZeusEpoch(epochTime, callback)`
+- `legacyZeusToUnix(zeusHash)`
 
-ZEUS is designed for modern timekeeping but also supports **legacy systems** with SHA-256 hashing. If Blake3 is unavailable, ZEUS will fall back to SHA-256, ensuring compatibility across older infrastructures.
+Notes:
 
-🏢 **Legacy Function Naming:**  
-- `legacyUnixToZeus()` → Converts UNIX to ZEUS hash using SHA-256.  
-- `legacyZeusToUnix()` → Attempts UNIX conversion but is not cryptographically reversible.  
+- `unixToZeus(unix)` is async (returns a Promise) for v0.1 TypeScript compatibility.
+- If you want a synchronous helper, use `unixToZeusSync(unix)`.
+- `zeusToUnix(zeusHash)` exists for continuity but throws because ZEUS hashes are one-way.
 
----
+## License
 
-## 🤡 Test Results
-
-ZEUS has passed all unit tests for functionality, security, and legacy compatibility.
-
-👉 10/10 Tests Passed  
-👉 Validates timestamps correctly (Ensures input is formatted and normalized properly)  
-👉 Ensures deterministic hashing (Same input always produces the same secure hash)  
-👉 Supports legacy SHA-256 fallback (Ensures compatibility with older systems if BLAKE3 is unavailable)  
-👉 Prevents invalid time manipulation (Rejects malformed, tampered, or unrealistic timestamps)  
-👉 Ensures consistent hash output across formats (Tests Date objects, ISO strings, and UNIX timestamps)  
-👉 Handles extreme dates correctly (Validates UNIX epoch and future dates like 2999-12-31)  
-👉 Rejects invalid inputs (Throws errors for undefined, null, and malformed timestamps)  
-👉 Performance benchmark confirmed (**1000 hashes computed in 12ms**)  
-
-Run tests yourself:
-
-```sh
-yarn test
-```
-
----
-
-## 🔒 Security & Trust
-
-ZEUS ensures **time integrity** without requiring a centralized authority. Hashes are **tamper-proof** and **deterministically generated**, making it impossible to predict or manipulate timestamps in advance.
-
----
-
-## 💚 License
-
-Licensed under **Apache 2.0**, ensuring open-source innovation while protecting integrity.
-
----
-
-## 🚀 Join the Revolution
-
-**UNIX is outdated. ZEUS is the future.**  
-Get started today and be part of the next evolution in timekeeping!
-
-LFCROOOOOOO!!!!  🔥⚡
-
+Apache 2.0
