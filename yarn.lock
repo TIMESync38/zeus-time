@@ -2346,14 +2346,9 @@ yocto-queue@^0.1.0:
   resolved "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zeus-time@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/zeus-time/-/zeus-time-0.1.0.tgz"
-  integrity sha512-6wN2pmXlQ5ht8NHevYglho1z+d54ytm5q76AstdbcMFZ+XmAYmANKnKRu1jjQRuAEmGZJO01qhoU6BQ5EPNB/w==
-
-zeus-time@^0.1.2:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/zeus-time/-/zeus-time-0.1.1.tgz#c271b9171d970dd638bbab30566437cd55bd6a8e"
-  integrity sha512-Jt0Wsjhf6y7LeNxsBK/47Y45tQ1QADnnWKP29qJkHr5fejo9jazcYQleiNt78pDKhUQF1tf+bxFHLk99z9qGSA==
+zeus-time@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/zeus-time/-/zeus-time-0.1.3.tgz#a8af06bcc91a8d61996a8355b561e9e8c7abc47d"
+  integrity sha512-byF6QJhSSUj5NATx8wQpdGzCncOrYpKJKi/sJMOOCRIe+vHeC6Ode8uMJlBObLyN0li10YzdONLjS09wAeG8Hw==
   dependencies:
-    zeus-time "^0.1.0"
+    zeus-time "^0.1.3"
