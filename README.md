@@ -153,3 +153,10 @@ Get started today and be part of the next evolution in timekeeping!
 
 LFCROOOOOOO!!!!  🔥⚡
 
+## Versioning note
+
+Version 0.1.x is the stable legacy line.
+It preserves deterministic behavior and API continuity.
+No breaking changes are introduced in patch releases.
+
+For the evolving compatibility and clarified semantics line, see the 0.2.x releases.
