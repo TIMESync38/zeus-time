@@ -1,4 +1,4 @@
-import { verifyZeusHash, unixToZeusSync, zeusToUnix } from "./api";
+import { verifyZeusHash, unixToZeusSync } from "./api";
 import { isValidZeusBase64Url, isValidZeusHex } from "./validation";
 
 // Compatibility surface for v0.1.x consumers.
