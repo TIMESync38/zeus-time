@@ -6,8 +6,8 @@ export {
   zeusHash,
   generateZeusHash,
   verifyZeusHash,
-  unixToZeus,
   unixToZeusSync,
+  unixToZeus,
   zeusToUnix
 } from "./api";
 
