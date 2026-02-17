@@ -5,7 +5,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+
 ---
+
+
+## [0.3.0] - 2026-02-16
+
+### Added
+- ZPK1 packed payload protocol helpers.
+- `packZPK1`, `unpackZPK1`, `isValidZPK1` exports.
+- Types: `CanonMode`, `HashAlgo`, `PackOptions`, `ZPKParsed`.
+
+### Notes
+- ZPK1 is a strict, pipe-delimited format for packaging pre-hashed payloads intended for external stamping.
+- ZPK1 output includes explicit `canon` and `algo` fields, with digest as lowercase hex.
+
+
+---
+
 
 ## [0.2.2] - 2026-02-09
 
@@ -31,7 +48,9 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - This release is opt-in and intended for early adopters and Expo environments.
 - `latest` continues to point to the stable 0.1.x line.
 
+
 ---
+
 
 ## [0.1.4] - 2026-02-08
 
@@ -40,7 +59,9 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - No code or behavioral changes.
 - Published as a safe patch to preserve existing users.
 
+
 ---
+
 
 ## [0.1.3] - 2025-01-27
 

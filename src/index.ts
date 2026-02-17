@@ -21,3 +21,7 @@ export {
   isValidZeusHex,
   isValidZeusBase64Url
 } from "./validation";
+
+// ZPK1 packed payload helpers
+export type { CanonMode, HashAlgo, PackOptions, ZPKParsed } from "./zpk";
+export { packZPK1, unpackZPK1, isValidZPK1 } from "./zpk";

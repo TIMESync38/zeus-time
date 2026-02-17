@@ -186,6 +186,32 @@ ZEUS provides proof of time, not surveillance.
 
 ------------------------------------------------------------------------
 
+
+
+## ZPK1 Packed Payloads
+
+ZPK1 is a strict, deterministic packed payload format for external stamping workflows. It contains metadata plus a digest, not raw payload data.
+
+Example:
+
+```ts
+import { packZPK1 } from "zeus-time";
+
+const packed = packZPK1({ hello: "world" }, { canon: "json_sorted_compact" });
+// ZPK1|canon=json_sorted_compact|algo=blake3|digest=<64 hex chars>
+```
+
+You can validate and parse packed strings:
+
+```ts
+import { isValidZPK1, unpackZPK1 } from "zeus-time";
+
+if (isValidZPK1(packed)) {
+  const parsed = unpackZPK1(packed);
+  console.log(parsed.algo, parsed.canon, parsed.digest);
+}
+```
+
 ## License
 
 Apache 2.0 Open, boring, and dependable.
