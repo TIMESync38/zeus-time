@@ -10,6 +10,45 @@ Unix time is treated as input material, not authority.
 
 ------------------------------------------------------------------------
 
+## ZEUS 0.3.x
+
+ZEUS 0.3 introduces the formalized **ZPK1 (ZEUS Proof Kernel v1)** canonical proof format.
+
+ZPK1 defines the structural encoding used to produce deterministic temporal receipts, including:
+
+- Canonicalization rule
+- Hash algorithm label
+- Timestamp tag
+- Payload digest
+
+ZEUS remains:
+
+- Deterministic
+- Substrate-independent
+- Cryptographically verifiable
+- Free of hidden entropy or mutation
+
+---
+
+## ZEUS Verify API (Hosted)
+
+ZEUS Verify is a hosted stamping service built on the deterministic ZEUS core.
+
+It allows:
+
+- Receipt issuance via API
+- Persistent receipt storage
+- Public verification without authentication
+- Subscription-based access tiers (rate-limited)
+
+Core guarantees remain identical between local ZEUS Core and ZEUS Verify.
+
+The API provides operational convenience — not altered cryptographic behavior.
+
+Documentation: https://verify.e2ee.ca/docs
+
+------------------------------------------------------------------------
+
 ## What ZEUS Is (and Is Not)
 
 ZEUS provides verifiable ordering and integrity of time-based events.

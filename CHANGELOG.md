@@ -8,6 +8,29 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ---
 
+## [0.3.1] – 2026-02-21
+
+### Added
+- Formalized ZPK1 (ZEUS Proof Kernel v1) canonical proof format.
+- Explicit structural encoding for deterministic receipt generation.
+- Versioned protocol prefix for forward compatibility.
+- Public API documentation references (ZEUS Verify).
+
+### Changed
+- Documentation refined for clarity and protocol precision.
+- Canonicalization rules clarified and made explicit.
+- Improved deterministic requirements language.
+- Removed unnecessary development dependencies (Babel type artifacts).
+- Cleaned build configuration.
+
+### Notes
+ZEUS 0.3.x marks the transition from library-first implementation to protocol-defined deterministic structure.
+
+ZPK1 defines the canonical encoding for temporal proofs while maintaining backward compatibility with prior deterministic outputs.
+
+No breaking changes to core hashing behavior.
+
+---
 
 ## [0.3.0] - 2026-02-16
 
