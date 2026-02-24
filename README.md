@@ -223,6 +223,10 @@ ZEUS provides proof of time, not surveillance.
 -   latest remains conservative
 -   New behavior is opt-in
 
+0.2.0+ changes semantics: unixToZeus now produces a ZEUS hash (one-way)
+
+If you need the old ISO helpers, install zeus-time@legacy or 0.1.4.
+
 ------------------------------------------------------------------------
 
 
