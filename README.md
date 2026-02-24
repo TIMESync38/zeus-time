@@ -45,7 +45,7 @@ Core guarantees remain identical between local ZEUS Core and ZEUS Verify.
 
 The API provides operational convenience — not altered cryptographic behavior.
 
-Documentation: https://verify.e2ee.ca/docs
+Documentation: https://www.e2ee.ca/verify
 
 ------------------------------------------------------------------------
 
